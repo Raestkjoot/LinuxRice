@@ -1,3 +1,6 @@
+# KDE Plasma Theming
+![alt text](./KDE_screenshot.png "KDE Screenshot")
+
 ## Global Theme
 I use the **Irixium** global theme made by phob1an.
 

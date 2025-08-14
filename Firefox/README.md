@@ -1,3 +1,6 @@
+# Firefox Browser Theming
+![alt text](./Firefox_screenshot.jpg "Firefox Screenshot")
+
 [Youtube - How to modify Firefox](https://youtu.be/0QVs1jVuA8c?si=CWdJkS9OrfHrePLC)
 
 Using [this](https://github.com/JM1705/firefox-irix-theme) Irixium theme as the starting point, that I have since modified (GNU General Public License v3.0).
