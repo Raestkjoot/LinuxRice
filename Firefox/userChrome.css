@@ -1,0 +1,294 @@
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/tabs_on_bottom_v2.css made available under Mozilla Public License v. 2.0
+ S*ee the above repository for updates as well as full license text. */
+
+/* This reorders toolbar to place tabs below other toolbars. Requires Firefox 133+ */
+
+/*I have also added theming from JM1705/firefox-irix-theme licensed under the GNU General Public License v3.0*/
+/* https://github.com/JM1705/firefox-irix-theme */
+
+@media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
+-moz-pref("userchrome.force-window-controls-on-left.enabled"){
+    #nav-bar > .titlebar-buttonbox-container{
+    order: -1 !important;
+    > .titlebar-buttonbox{
+        flex-direction: row-reverse;
+    }
+    }
+}
+@media not (-moz-bool-pref: "sidebar.verticalTabs"),
+not -moz-pref("sidebar.verticalTabs"){
+    .global-notificationbox,
+    #tab-notification-deck,
+    #TabsToolbar{
+    order: 1;
+    }
+    #TabsToolbar > :is(.titlebar-spacer,.titlebar-buttonbox-container){
+    display: none;
+    }
+    :root[sizemode="fullscreen"] #nav-bar > .titlebar-buttonbox-container{
+        display: flex !important;
+    }
+    :root:is([tabsintitlebar],[customtitlebar]) #toolbar-menubar:not([autohide="false"]) ~ #nav-bar{
+        > .titlebar-buttonbox-container{
+            display: flex !important;
+        }
+        :root[sizemode="normal"] & {
+            > .titlebar-spacer{
+                display: flex !important;
+            }
+        }
+        :root[sizemode="maximized"] & {
+            > .titlebar-spacer[type="post-tabs"]{
+                display: flex !important;
+            }
+            @media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
+            -moz-pref("userchrome.force-window-controls-on-left.enabled"),
+            (-moz-gtk-csd-reversed-placement),
+            (-moz-platform: macos){
+                > .titlebar-spacer[type="post-tabs"]{
+                    display: none !important;
+                }
+                > .titlebar-spacer[type="pre-tabs"]{
+                    display: flex !important;
+                }
+            }
+        }
+    }
+}
+
+
+/* Tabs */
+#TabsToolbar-customization-target {
+background-color: #c1c1c1 !important;
+}
+#tabbrowser-tabs {
+border-bottom: 2px solid #c1c1c1;
+}
+
+/* Address bar */
+#nav-bar {
+border-top: 1px solid #ececec !important;
+border-left: 1px solid #ececec !important;
+border-right: 1px solid #919191 !important;
+border-bottom: 1px solid #919191 !important;
+margin: 1px;
+box-shadow: 0.5px 0.5px 0 0.5px #606060, -0.5px -0.5px 0 0.5px #ececec !important;
+background-color: #c1c1c1 !important;
+background-image: unset !important;
+}
+#urlbar-background {
+border-radius: 0 !important;
+border: 1px solid blue !important;
+border-top-color: #606060 !important;
+border-left-color: #606060 !important;
+border-right-color: #c1c1c1 !important;
+border-bottom-color: #c1c1c1 !important;
+background-color: #ABCCB0 !important;
+}
+#urlbar[open="true"] {
+border-top-color: #ececec;
+border-left-color: #ececec;
+border-right-color: #919191;
+border-bottom-color: #919191;
+}
+#urlbar[open="true"] > #urlbar-background {
+border-top-color: #c1c1c1 !important;
+border-left-color: #c1c1c1 !important;
+border-right-color: #606060 !important;
+border-bottom-color: #606060 !important;
+}
+#urlbar, #urlbar-container{
+min-height: unset !important;
+}
+#urlbar {
+margin-top: 2px;
+--urlbar-height: 26px !important;
+}
+/* Change the color of the bookmark star in the address bar */
+#star-button-box[starred="true"] > #star-button {
+fill: green !important; /* Change this to any color you want */
+}
+#star-button-box:not([starred="true"]) > #star-button {
+fill: black !important; /* Color when the page is not bookmarked */
+}
+
+/* back/forward & menu Buttons */
+#back-button > image:nth-child(2),
+#forward-button > image:nth-child(2),
+#reload-button > image:nth-child(1),
+#nav-bar-overflow-button > image:nth-child(1),
+#PanelUI-menu-button > stack:nth-child(1),
+#unified-extensions-button > image:nth-child(1) {
+border-radius: 0 !important;
+width: 28px !important;
+height: 28px !important;
+padding: 5px !important;
+margin: 2px !important;
+border: 1px solid #c1c1c1;
+}
+#back-button:hover > image:nth-child(2),
+#forward-button:hover > image:nth-child(2),
+#reload-button:hover > image:nth-child(1),
+#nav-bar-overflow-button:hover > image:nth-child(1),
+#PanelUI-menu-button:hover > stack:nth-child(1),
+#unified-extensions-button:hover > image:nth-child(1) {
+border: 1px solid #737373;
+border-left-color: #cccccc;
+border-top-color: #cccccc;
+background-color: #a3a3a3;
+box-shadow:
+0.5px 0.5px 0 0.5px #4c4c4c,
+0 0 0 1px #e1e1e1,
+-1px -1px 0 1.5px #4c4c4c,
+0 0 0 2px #252525;
+}
+#back-button:active > image:nth-child(2),
+#forward-button:active > image:nth-child(2),
+#reload-button:active > image:nth-child(1),
+#nav-bar-overflow-button:active > image:nth-child(1),
+#PanelUI-menu-button:active > stack:nth-child(1),
+#unified-extensions-button:active > image:nth-child(1) {
+border: 1px solid #cccccc;
+border-left-color: #737373;
+border-top-color: #737373;
+background-color: #a8a8a8 !important;
+box-shadow:
+0.5px 0.5px 0 0.5px #e1e1e1,
+0 0 0 1px #4c4c4c,
+-1px -1px 0 1.5px #252525,
+0 0 0 2px #4c4c4c;
+}
+#back-button[disabled="true"] > image:nth-child(2),
+#forward-button[disabled="true"] > image:nth-child(2),
+#reload-button[disabled="true"] > image:nth-child(1),
+#nav-bar-overflow-button[disabled="true"] > image:nth-child(1),
+#PanelUI-menu-button[disabled="true"] > stack:nth-child(1),
+#unified-extensions-button[disabled="true"] > image:nth-child(1) {
+border: 1px solid #c1c1c1;
+background-color: unset;
+box-shadow: unset;
+}
+
+/* Bookmarks */
+.bookmark-item,
+.openintabs-menuitem {
+    border-radius: 0 !important;
+    height: 28px !important;
+    padding: 5px !important;
+    margin: 2px !important;
+    border: 1px solid #c1c1c1;
+}
+.bookmark-item:hover,
+.openintabs-menuitem:hover {
+    border: 1px solid #737373;
+    border-left-color: #cccccc;
+    border-top-color: #cccccc;
+    background-color: #a3a3a3;
+    box-shadow:
+    0.5px 0.5px 0 0.5px #4c4c4c,
+    0 0 0 1px #e1e1e1,
+    -1px -1px 0 1.5px #4c4c4c,
+    0 0 0 2px #252525;
+}
+
+/* Tabs */
+.tab-background {
+    border-radius: 0 !important;
+}
+.tab-stack, .tab-background, .tab-loading-burst {
+    margin: 0 0 0 0 !important;
+    padding: 0 0 0 0 !important;
+}
+.tabbrowser-tab {
+    padding: 0 0 0 0 !important;
+}
+.tab-label-container {
+    height: unset !important;
+}
+:root{
+    --tab-min-height: 22px !important;
+}
+.tab-secondary-label {
+    font-size: 5px !important;
+    margin-top: -4px !important;
+}
+.tab-stack {
+    border-top: 1px solid #4d4d4d;
+    border-bottom: 1px solid #4d4d4d;
+    border-left: 1px solid #4d4d4d;
+    border-right: 1px solid #595959;
+    margin-left: 1px !important;
+    box-shadow: -1px 0 0 0 !important;
+}.tabbrowser-tab[first-visible-unpinned-tab="true"] > .tab-stack,
+.tabbrowser-tab[first-visible-tab="true"] > .tab-stack {
+    margin-left: 0 !important;
+    box-shadow: unset !important;
+}
+.tab-background {
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #808080;
+    border-left: 1px solid #dedede;
+    border-right: 1px solid #808080;
+}
+.tab-loading-burst {
+    border-left: 1px solid #bfbfbf;
+    background-color: #999999 !important;
+}
+.tab-label-container {
+    margin-right: 14px;
+}.tabbrowser-tab[selected="true"] {
+    margin-top: 0 !important;
+    margin-right: -1px !important;
+}
+.tabbrowser-tab[selected="true"] > .tab-stack {
+    border-top: 1px solid #4d4d4d;
+    border-left: 1px solid #4d4d4d;
+    border-right: 1px solid #262626;
+    margin-left: 0 !important;
+    box-shadow: unset !important;
+}
+.tabbrowser-tab[selected="true"] > .tab-stack > .tab-background {
+    border-top: 1px solid #ececec;
+    border-left: 1px solid #ececec;
+    border-right: 1px solid #606060;
+}
+.tabbrowser-tab[selected="true"] > .tab-stack > .tab-background > .tab-loading-burst {
+    border-top: 1px solid #ececec;
+    border-left: 1px solid #ececec;
+    border-right: 1px solid #919191;
+    background-color: #c1c1c1 !important;
+}
+.tabbrowser-tab[selected="true"] > .tab-stack > .tab-content > .tab-label-container > .tab-text {
+    font-weight: bold;
+}
+.tab-label-container[pinned="true"] {
+    margin-right: 0;
+}
+/*   Tabs - close/open buttons */
+/*
+.new-tab-button,
+.tab-close-button {
+    border-radius: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
+    padding: 5px !important;
+    margin: 2px !important;
+    border: 1px solid #c1c1c1;
+}
+
+.new-tab-button:hover,
+.tab-close-button:hover {
+    border: 1px solid #737373;
+    border-left-color: #cccccc;
+    border-top-color: #cccccc;
+    background-color: #a3a3a3;
+    box-shadow:
+    0.5px 0.5px 0 0.5px #4c4c4c,
+    0 0 0 1px #e1e1e1,
+    -1px -1px 0 1.5px #4c4c4c,
+    0 0 0 2px #252525;
+}*/
+/* TODO: whats the open new tab button? */
+/* TODO: whats the reload button? */
+/* TODO: whats the bookmark button? */
+/* TODO: whats the list all tabs button? */
