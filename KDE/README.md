@@ -45,6 +45,9 @@ EndSection
 ```
 
 ## Small Programs
-
 - `inspi_terminal.sh`: runs when I open my terminal. Displays some system information and displays a random quote from my list of favorite quotes.
 - `poweroff_timer.sh`: powers off the system after x amount of minutes. Usage: `./poweroff_timer <minutes>`.
+
+
+## Connecting Devices
+- **Bose Quiet Comfort:** It seems the Bose Quiet Comfort 35 does has issues with pairing with Bluetooth LE (Low Energy) [Source](https://askubuntu.com/questions/833322/pair-bose-quietcomfort-35-with-ubuntu-over-bluetooth). Go to `/etc/bluetooth/main.conf` and replace `#ControllerMode = dual` with `#ControllerMode = bredr` and then restart bluetooth with the terminal command `sudo systemctl restart bluetooth.service`. Hold the slide button in the on position for a few seconds to switch the headset to pairing mode and connect. Afterwards, you can enable put `dual` back, since it's just the initial pairing that has issues.
