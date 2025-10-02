@@ -1,61 +1,22 @@
-/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/tabs_on_bottom_v2.css made available under Mozilla Public License v. 2.0
- S*ee the above repository for updates as well as full license text. */
-
-/* This reorders toolbar to place tabs below other toolbars. Requires Firefox 133+ */
-
-/*I have also added theming from JM1705/firefox-irix-theme licensed under the GNU General Public License v3.0*/
+/*I have added theming from JM1705/firefox-irix-theme licensed under the GNU General Public License v3.0*/
 /* https://github.com/JM1705/firefox-irix-theme */
 
-@media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
--moz-pref("userchrome.force-window-controls-on-left.enabled"){
-    #nav-bar > .titlebar-buttonbox-container{
-    order: -1 !important;
-    > .titlebar-buttonbox{
-        flex-direction: row-reverse;
-    }
-    }
-}
-@media not (-moz-bool-pref: "sidebar.verticalTabs"),
-not -moz-pref("sidebar.verticalTabs"){
-    .global-notificationbox,
-    #tab-notification-deck,
-    #TabsToolbar{
-    order: 1;
-    }
-    #TabsToolbar > :is(.titlebar-spacer,.titlebar-buttonbox-container){
-    display: none;
-    }
-    :root[sizemode="fullscreen"] #nav-bar > .titlebar-buttonbox-container{
-        display: flex !important;
-    }
-    :root:is([tabsintitlebar],[customtitlebar]) #toolbar-menubar:not([autohide="false"]) ~ #nav-bar{
-        > .titlebar-buttonbox-container{
-            display: flex !important;
-        }
-        :root[sizemode="normal"] & {
-            > .titlebar-spacer{
-                display: flex !important;
-            }
-        }
-        :root[sizemode="maximized"] & {
-            > .titlebar-spacer[type="post-tabs"]{
-                display: flex !important;
-            }
-            @media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
-            -moz-pref("userchrome.force-window-controls-on-left.enabled"),
-            (-moz-gtk-csd-reversed-placement),
-            (-moz-platform: macos){
-                > .titlebar-spacer[type="post-tabs"]{
-                    display: none !important;
-                }
-                > .titlebar-spacer[type="pre-tabs"]{
-                    display: flex !important;
-                }
-            }
-        }
+@-moz-document url(chrome://browser/content/browser.xul),
+url(chrome://browser/content/browser.xhtml) {
+    #urlbar-background{
+    background-color: #ececec !important;
     }
 }
 
+#TabsToolbar{
+    order: 1;
+}
+#PersonalToolbar { /* bookmarks toolbar */
+order: 2;
+border-top: 1px solid #919191 !important;
+border-left: 1px solid #ececec !important;
+border-right: 1px solid #919191 !important;
+}
 
 /* Tabs */
 #TabsToolbar-customization-target {
@@ -76,31 +37,31 @@ box-shadow: 0.5px 0.5px 0 0.5px #606060, -0.5px -0.5px 0 0.5px #ececec !importan
 background-color: #c1c1c1 !important;
 background-image: unset !important;
 }
-#urlbar-background {
+.urlbar-background {
 border-radius: 0 !important;
 border: 1px solid blue !important;
 border-top-color: #606060 !important;
 border-left-color: #606060 !important;
 border-right-color: #c1c1c1 !important;
 border-bottom-color: #c1c1c1 !important;
-background-color: #ABCCB0 !important;
+background: #ABCCB0 !important;
 }
-#urlbar[open="true"] {
+.urlbar[open="true"] {
 border-top-color: #ececec;
 border-left-color: #ececec;
 border-right-color: #919191;
 border-bottom-color: #919191;
 }
-#urlbar[open="true"] > #urlbar-background {
+.urlbar[open="true"] > .urlbar-background {
 border-top-color: #c1c1c1 !important;
 border-left-color: #c1c1c1 !important;
 border-right-color: #606060 !important;
 border-bottom-color: #606060 !important;
 }
-#urlbar, #urlbar-container{
+.urlbar, .urlbar-container{
 min-height: unset !important;
 }
-#urlbar {
+.urlbar {
 margin-top: 2px;
 --urlbar-height: 26px !important;
 }
@@ -264,6 +225,7 @@ box-shadow: unset;
 .tab-label-container[pinned="true"] {
     margin-right: 0;
 }
+
 /*   Tabs - close/open buttons */
 /*
 .new-tab-button,
